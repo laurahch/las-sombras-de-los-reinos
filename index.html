@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Las sombras de los reinos</title>
+
+  <!-- Letras bonitas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -15,80 +19,184 @@
 
     body {
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-
+      font-family: 'Cormorant Garamond', serif;
+      color: #f6eddc;
       background:
-        radial-gradient(circle at center, #26352b 0%, #111713 45%, #050706 100%);
-
-      color: #f3ead8;
-      font-family: Georgia, serif;
+        radial-gradient(circle at top, rgba(97, 123, 93, 0.35) 0%, rgba(16, 22, 18, 0.15) 35%, rgba(5, 8, 6, 0.95) 75%),
+        linear-gradient(180deg, #0f1712 0%, #070a08 100%);
+      overflow: hidden;
+      position: relative;
     }
 
-    .inicio {
-      padding: 40px;
+    /* brillo suave */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(214, 189, 129, 0.18), transparent 30%),
+        radial-gradient(circle at 20% 80%, rgba(140, 170, 150, 0.08), transparent 25%),
+        radial-gradient(circle at 80% 75%, rgba(140, 170, 150, 0.06), transparent 25%);
+      pointer-events: none;
     }
 
-    .saga {
-      font-size: 14px;
-      letter-spacing: 6px;
+    /* ligera niebla */
+    body::after {
+      content: "";
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: -80px;
+      height: 220px;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 40%, transparent 75%);
+      filter: blur(25px);
+      pointer-events: none;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      width: min(900px, 100%);
+      text-align: center;
+      padding: 60px 30px;
+      border: 1px solid rgba(214, 199, 165, 0.35);
+      background: rgba(12, 16, 13, 0.45);
+      backdrop-filter: blur(4px);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.03) inset,
+        0 20px 60px rgba(0,0,0,0.45);
+      border-radius: 18px;
+    }
+
+    .kicker {
+      font-family: 'Cinzel', serif;
       text-transform: uppercase;
-      margin-bottom: 25px;
-      opacity: 0.7;
+      letter-spacing: 5px;
+      font-size: 0.85rem;
+      color: #d8c08a;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: clamp(42px, 8vw, 95px);
-      font-weight: normal;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.8rem, 7vw, 5.8rem);
       line-height: 0.95;
-      margin-bottom: 25px;
+      font-weight: 600;
+      color: #f7f0e2;
+      text-shadow: 0 0 18px rgba(255, 244, 217, 0.08);
+      margin-bottom: 24px;
     }
 
-    .subtitulo {
-      font-size: 18px;
-      font-style: italic;
-      opacity: 0.75;
-      margin-bottom: 40px;
+    .subtitle {
+      max-width: 650px;
+      margin: 0 auto 14px;
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      color: rgba(246, 237, 220, 0.88);
     }
 
-    button {
-      padding: 15px 30px;
-      background: transparent;
-      border: 1px solid #d7c7a5;
-      color: #f3ead8;
-      font-family: Georgia, serif;
-      letter-spacing: 3px;
-      cursor: pointer;
-      transition: 0.3s;
+    .mini {
+      max-width: 680px;
+      margin: 0 auto 35px;
+      font-size: 1.08rem;
+      letter-spacing: 0.3px;
+      color: rgba(246, 237, 220, 0.7);
     }
 
-    button:hover {
-      background: #f3ead8;
-      color: #111713;
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      letter-spacing: 2px;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #d9c08c 0%, #b99857 100%);
+      color: #11150f;
+      border: 1px solid #d9c08c;
+      box-shadow: 0 8px 24px rgba(185, 152, 87, 0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(185, 152, 87, 0.28);
+    }
+
+    .btn-secondary {
+      color: #f6eddc;
+      border: 1px solid rgba(214, 199, 165, 0.45);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    .bottom-note {
+      margin-top: 34px;
+      font-size: 0.95rem;
+      color: rgba(246, 237, 220, 0.62);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 700px) {
+      .card {
+        padding: 45px 22px;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+      }
+
+      .mini {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
-
 <body>
+  <main class="hero">
+    <section class="card">
+      <p class="kicker">Saga de fantasía romántica</p>
 
-  <main class="inicio">
+      <h1>El precio de<br>la abundancia</h1>
 
-    <p class="saga">Las sombras de los reinos</p>
+      <p class="subtitle">
+        Bienvenida a <strong>Las sombras de los reinos</strong>
+      </p>
 
-    <h1>
-      El precio<br>
-      de la abundancia
-    </h1>
+      <p class="mini">
+        Cinco reinos. Secretos, criaturas, magia y destinos entrelazados.
+        Cruza la frontera de <strong>Sgardcrod</strong> y adéntrate en un mundo donde cada decisión tiene un precio.
+      </p>
 
-    <p class="subtitulo">
-      Siete reinos. Un mundo por descubrir.
-    </p>
+      <div class="buttons">
+        <a href="#" class="btn btn-primary">EXPLORAR SGARDCROD</a>
+        <a href="#" class="btn btn-secondary">DESCUBRIR LA SAGA</a>
+      </div>
 
-    <button>ENTRAR EN SGARDCROD</button>
-
+      <p class="bottom-note">Libro I · Romance, fantasía y aventura épica</p>
+    </section>
   </main>
-
 </body>
 </html>
